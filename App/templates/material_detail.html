@@ -1,0 +1,133 @@
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>{{ material_detail.name }}</title>
+  <link rel="stylesheet" href="{% static 'material_detail/style.css' %}">
+  
+  <link rel="icon" href="{% static 'images/logo.png' %}" type="image/gif" sizes="20x20">
+
+
+
+  <!-- partial:index.partial.html -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--  Include the above in your HEAD tag ---------->
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"><div class="pd-wrap">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+
+
+
+</head>
+<body>
+
+
+
+  <ul dir="rtl" style="background-color: #143a48;">
+    <li><a style="color: white;"  href="{% url 'App:index' %}">BOM<span style="color: #ffc107;">Dashboard</span></a></li>
+    <li style="float:right">  <a style="color: white;" href="whatsapp://send?text= http://atroapp.ir{{ material_detail.get_absolute_url }} " data-action="share/whatsapp/share">  <i class="fa fa-whatsapp" style="font-size:40px; color:#ffc107 "> </i>  اشتراک گذاری </a> </li>
+  </ul>
+
+<br>
+
+  	<div class="container">
+	        <div class="heading-section">
+	            <h2> {{ material_detail.name }} </h2>
+	        </div>
+
+          <div class="row">
+
+	        	<div class="col-md-6">
+	        	  	<div id="slider" class="owl-carousel product-slider">
+					   <div class="item1"><img style="border-radius: 10px;" src="{{ material_detail.image.url }}"></div>
+                  <div class="item3"><img style="border-radius: 10px;" src="{{ material_detail.box_img.url }}"></div>
+				  	  	</div>
+                <br>
+			      		<div align="center" id="thumb" class="owl-carousel product-thumb">
+			      			<div class="item1"><img style="border-radius: 10px;" src="{{ material_detail.image.url }}"></div>
+			      			<div class="item3"><img style="border-radius: 10px;" src="{{ material_detail.box_img.url }}"></div>
+			      		</div>
+	        	</div>
+
+
+	        	<div align="right" dir="rtl" class="col-md-6">
+	        		<div class="product-dtl">
+        				<div class="product-info">
+      <br>
+                  <div class="product-name"> کد  :  <p style='color:#007bff;' align="center"> {{ material_detail.code }} </p> </div> <hr>
+		          <div class="product-name"> موارد کاربرد  :  <p align="center"> {% for product in material_detail.product.all %} <a href="{{ product.get_absolute_url }}"> {{ product }} </a> <br>&nbsp;&nbsp;{% endfor %}  </p></div> <hr>
+                  <div class="product-name"> دسته بندی  :  <p align="center"> {% for category in material_detail.category.all %} <a href="{{ category.get_absolute_url }}"> {{ category }} </a> <br>&nbsp;&nbsp;{% endfor %}  </p></div> <hr>
+                  <div class="product-name"> تامین کننده  :  <p align="center"> {% for supplier in material_detail.supplier.all %} <a href="{{ supplier.get_absolute_url }}"> {{ supplier }} </a> <br>&nbsp;&nbsp;{% endfor %} </p></div> <hr>
+                  <div class="product-name"> برچسب ها  :  <p style='color:#007bff;' align="center"> {{ material_detail.tag }} </p> </div>
+
+		        		</div>
+
+                <br><hr>
+
+              	<div class="row">
+	        				<div class="col-md-6">
+	        					<label for="size">خرید خارجی</label>
+	        	{% if material_detail.foreign_purchase == True %}   <span style='font-size:20px;color:green;'>&#10004;</span>   {% else %}  <span style='font-size:20px;color:red;'>&#10008;</span>   {% endif %}
+                  </div>
+	        				<div class="col-md-6">
+	        					<label for="color">خرید استاندارد</label>
+	        			{% if material_detail.standard_purchase == True %}   <span style='font-size:20px;color:green;'>&#10004;</span>   {% else %}  <span style='font-size:20px;color:red;'>&#10008;</span>   {% endif %}
+                  </div>
+	        			</div>
+                
+                <br> <hr>
+                 <div class="product-name"> نقشه قطعه  :  <p style='color:#007bff;' align="center">  <a href="{{ material_detail.file.url }}" download>  <button class="btn"><i class="fa fa-download"></i> Download</button>  </a> </p> </div>
+                <hr>
+                
+                <div class="product-name">  ضرایب مصرف  :  <p align="center"> {% for rate in material_detail.rate.all %}  {{ rate.product }}({{ rate.rate }})  <br>&nbsp;&nbsp;{% endfor %} </p> </div>
+
+
+	        		</div>
+	        	</div>
+	        </div>
+	        <div class="product-info-tabs">
+		        <ul class="nav nav-tabs" id="myTab" role="tablist">
+				  	<li class="nav-item">
+				    	<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true"> مشخصات </a>
+				  	</li>
+				  	<li class="nav-item">
+				    	<a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false"> مشخصات بسته بندی </a>
+				  	</li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+				  	<div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+              <pre align="right" dir="rtl"  style="font-family:iransans;"  > {{ material_detail.description }} </pre>
+            </div>
+				  	<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+              <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <pre align="right" dir="rtl" style="font-family:iransans;"  > {{ material_detail.box_description }} </pre>
+              </div>
+				  	</div>
+				</div>
+			</div>
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- partial -->
+  <script src="{% static 'material_detail/script.js' %}"></script>
+
+
+</body>
+</html>
+
+
+
+{% endblock content %}

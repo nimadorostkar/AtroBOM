@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+{% if messages %}
+{% for k in messages %}
+
+<br>
+<nav  style="background-color: #143a48; margin-right: 15px;  margin-left: 15px;" class="navbar navbar-inverse">
+  <br>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> لیست تامین کنندگان  </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li>
+        <form dir="rtl" action="{% url 'App:supplier_response' %}" method="post">
+           {% csrf_token %}
+          <input style="width:160px" name="q" type="search" placeholder=" جستجو برای تامین کننده... ">
+        </form>
+      </li>
+
+      <li>
+        &nbsp;&nbsp;
+      </li>
+    </ul>
+  </div>
+  <br>
+</nav>
+
+
+
+<br> <br>
+<h5 style="color:#ffc107;" dir="rtl" align="center"> {{k}} </h5>
+{% endfor %}
+{% endif %}
+
+
+
+{% if sr %}
+
+<br>
+<nav  style="background-color: #143a48; margin-right: 15px;  margin-left: 15px;" class="navbar navbar-inverse">
+  <br>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> لیست تامین کنندگان  </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li>
+        <form dir="rtl" action="{% url 'App:category_response' %}" method="post">
+           {% csrf_token %}
+          <input style="width:160px" name="q" type="search" placeholder=" جستجو برای دسته بندی... ">
+        </form>
+      </li>
+
+      <li>
+        &nbsp;&nbsp;
+      </li>
+    </ul>
+  </div>
+  <br>
+</nav>
+
+<!-- partial:index.partial.html -->
+<div dir="rtl" id="demo">
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+    <thead>
+
+      <tr>
+        <th> نام </th>
+      </tr>
+
+    </thead>
+    <tbody>
+      {% for category in category_list %}
+      <tr>
+        <td data-title="نام"> <a href="{{supplier.get_absolute_url}}">  {{ category.name }} </a>   </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+<!-- partial -->
+
+
+{% endif %}
+
+
+
+{% endblock content %}

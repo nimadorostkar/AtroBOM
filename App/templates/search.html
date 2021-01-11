@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<br> <br>
+<h4 dir="rtl" align="center"> صفحه جستجوی قطعات </h4>
+
+
+{% if messages %}
+{% for k in messages %}
+<br> <br>
+<h5 style="color:#ffc107;" dir="rtl" align="center"> {{k}} </h5>
+{% endfor %}
+{% endif %}
+
+
+
+{% if sr %}
+
+<!-- partial:index.partial.html -->
+<div dir="rtl" id="demo">
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+
+        <tr>
+          <th> نام </th>
+          <th> کد </th>
+          <th> موارد کاربرد </th>
+          <th> تصویر </th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+
+        {% for material in sr %}
+        <tr>
+          <td data-title="نام"> <a href="{{material.get_absolute_url}}">  {{ material.name }} </a>   </td>
+          <td data-title="کد"> {{ material.code }} </td>
+          <td data-title="موارد کاربرد">  {% for product in material.product.all %} {{ product }}&nbsp;&nbsp;{% endfor %} </td>
+          <td data-title="تصویر">  <img align="right" style="border-radius: 50%;" width="50" height="50" src="{{ material.image.url }}"> </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- partial -->
+
+{% endif %}
+
+
+
+
+{% endblock content %}

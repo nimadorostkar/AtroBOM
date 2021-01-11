@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<br>
+<nav  style="background-color: #143a48; margin-right: 15px;  margin-left: 15px;" class="navbar navbar-inverse">
+  <br>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> لیست قطعات  </a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+        <form action="{% url 'App:material_response' %}" method="get">
+        <input list="product" size="15" name="product" type="search" placeholder="محصول">
+        <datalist id="product">
+          {% for product in products %}
+            <option value= "{{ product.name }}" >
+          {% endfor %}
+        </datalist>
+      </form>
+      </li>
+      <li>
+        <form action="{% url 'App:material_response' %}" method="get">
+          <input list="category" size="15" name="category" type="search" placeholder="دسته بندی">
+          <datalist id="category">
+            {% for category in categorys %}
+              <option value= "{{ category.name }}" >
+            {% endfor %}
+          </datalist>
+        </form>
+      </li>
+      <li>
+        <form action="{% url 'App:material_response' %}" method="get">
+          <input list="supplier" size="15" name="supplier" type="search" placeholder="تامین کننده">
+          <datalist id="supplier">
+            {% for supplier in suppliers %}
+              <option value= "{{ supplier.name }}" >
+            {% endfor %}
+          </datalist>
+        </form>
+      </li>
+      <li>
+        <form action="{% url 'App:material_response' %}" method="get">
+          <input size="15" name="code" type="search" placeholder=" کد ">
+        </form>
+      </li>
+    </ul>
+
+  </div>
+  <br>
+</nav>
+
+
+
+<!-- partial:index.partial.html -->
+<div dir="rtl" id="demo">
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+
+        <tr>
+          <th> نام </th>
+          <th> کد </th>
+          <th> موارد کاربرد </th>
+          <th> تصویر </th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for material in material_list %}
+        <tr>
+          <td data-title="نام"> <a href="{{material.get_absolute_url}}">  {{ material.name }} </a>   </td>
+          <td data-title="کد"> {{ material.code }} </td>
+          <td data-title=" موارد کاربرد">  {% for product in material.product.all %} {{ product }}&nbsp;&nbsp;{% endfor %} </td>
+          <td data-title="تصویر">  <img align="right" style="border-radius: 50%;" width="50" height="50" src="{{ material.image.url }}"> </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- partial -->
+
+
+
+{% endblock content %}

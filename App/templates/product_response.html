@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+{% if messages %}
+{% for k in messages %}
+
+<br>
+<nav  style="background-color: #143a48; margin-right: 15px;  margin-left: 15px;" class="navbar navbar-inverse">
+  <br>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> لیست موارد کاربرد </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li>
+        <form dir="rtl" action="{% url 'App:product_response' %}" method="post">
+           {% csrf_token %}
+          <input style="width:160px" name="q" type="search" placeholder=" جستجو برای موارد کاربرد... ">
+        </form>
+      </li>
+
+      <li>
+        &nbsp;&nbsp;
+      </li>
+    </ul>
+  </div>
+  <br>
+</nav>
+
+
+
+<br> <br>
+<h5 style="color:#ffc107;" dir="rtl" align="center"> {{k}} </h5>
+{% endfor %}
+{% endif %}
+
+
+
+{% if sr %}
+
+<br>
+<nav  style="background-color: #143a48; margin-right: 15px;  margin-left: 15px;" class="navbar navbar-inverse">
+  <br>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"> لیست موارد کاربرد </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+
+      <li>
+        <form dir="rtl" action="{% url 'App:product_response' %}" method="post">
+           {% csrf_token %}
+          <input style="width:160px" name="q" type="search" placeholder=" جستجو برای محصول... ">
+        </form>
+      </li>
+
+      <li>
+        &nbsp;&nbsp;
+      </li>
+    </ul>
+  </div>
+  <br>
+</nav>
+
+<!-- partial:index.partial.html -->
+<div dir="rtl" id="demo">
+
+  <!-- Responsive table starts here -->
+  <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+  <div class="table-responsive-vertical shadow-z-1">
+  <!-- Table starts here -->
+  <table id="table" class="table table-hover table-mc-light-blue">
+      <thead>
+
+        <tr>
+          <th> نام </th>
+          <th> کد </th>
+          <th> توضیحات </th>
+          <th> تصویر </th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for product in sr %}
+        <tr>
+          <td data-title="نام"> <a href="{{product.get_absolute_url}}">   {{ product.name }} </a>   </td>
+          <td data-title="کد"> {{ product.code }} </td>
+          <td data-title="توضیحات"> {{ product.description }}  </td>
+          <td data-title="تصویر">  <img align="right" style="border-radius: 50%;" width="50" height="50" src="{{ product.image.url }}"> </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- partial -->
+
+
+{% endif %}
+
+
+
+{% endblock content %}

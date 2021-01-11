@@ -1,0 +1,12 @@
+{% extends 'base_login.html' %}
+{% load static %}
+{% block content %}
+
+<form dir="rtl" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+</form>
+
+
+{% endblock content %}
