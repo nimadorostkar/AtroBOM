@@ -1,5 +1,4 @@
-## bill of materials application with django
-# by Atrotech
+## Bill Of Materials (BOM) application with django [by Atrotech](https://github.com/atrotech) 
 ###  
 
 
