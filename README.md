@@ -3,8 +3,16 @@
 ###  
 
 
-Bill Of Materials application with Django (Python-based free and open-source web framework)
+Bill Of Materials application with Django (Python-based free and open-source web framework). <br>
 
+
+## Getting started
+
+#### Pip
+```bash
+pip install -r requirements.txt
+
+``
 
 
 ![example](https://github.com/nimadorostkar/AtroBOM/blob/master/screenshot/Screen%20Shot%201399-10-22%20at%2014.48.43.png)
