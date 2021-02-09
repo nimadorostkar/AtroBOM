@@ -4,8 +4,6 @@ from django.utils.html import format_html
 from django.urls import reverse
 
 
-
-
 class Category(models.Model):
     name=models.CharField(max_length=200,verbose_name = "نام")
 
@@ -101,6 +99,7 @@ class Material(models.Model):
     def image_tag(self):
         return format_html("<img width=50 src='{}'>".format(self.image.url))
 
+    
 
     def __str__(self):
         return self.name
