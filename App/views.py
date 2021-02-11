@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 
 
+
 @login_required
 def index(request):
     material_count=models.Material.objects.all().count()
@@ -195,7 +196,6 @@ def product_detail(request, id):
 
 
 
-
 ############### category ###############
 
 @login_required
@@ -258,7 +258,6 @@ def category_detail(request, id):
     'product_count': product_count,
     'category_count': category_count,
     'supplier_count': supplier_count})
-
 
 
 
@@ -332,7 +331,6 @@ def supplier_detail(request, id):
     'supplier_count': supplier_count})
     
     
-
 
 
 
