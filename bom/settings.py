@@ -3,6 +3,8 @@ import os
 
 
 
+
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -99,6 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -125,3 +129,5 @@ STATIC_ROOT='/home/atroappi/public_html/static'
 
 MEDIA_ROOT='/home/atroappi/public_html/media'
 MEDIA_URL='/media/'
+
+
