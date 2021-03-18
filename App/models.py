@@ -59,7 +59,7 @@ class Product(models.Model):
 
 
 
-
+#------------------------------------------------------------------------
 class Rate(models.Model):
     rate=models.CharField(max_length=10,null=True, blank=True,verbose_name = " ضریب مصرف ")
     product=models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name = " موارد کاربرد  ")
