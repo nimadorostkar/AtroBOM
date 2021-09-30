@@ -1,6 +1,5 @@
 from django.contrib import admin
 from . import models
-
 from django.contrib.admin.models import LogEntry
 admin.site.register(LogEntry)
 
